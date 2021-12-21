@@ -4,7 +4,7 @@ import { SchedulesModule } from './pages/schedules/schedules.module';
 
 const routes: Routes = [
   { 
-    path: 'shedule', loadChildren: () => import('./pages/schedules/schedules.module').then(mod => mod.SchedulesModule)
+    path: 'schedule', loadChildren: () => import('./pages/schedules/schedules.module').then(mod => mod.SchedulesModule)
   }
 ];
 

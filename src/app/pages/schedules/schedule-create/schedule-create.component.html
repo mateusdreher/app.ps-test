@@ -1,0 +1,46 @@
+<div class="main">
+    <div class="background"></div>
+    <form class="form-schedule" [formGroup]="form">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Mensagem</mat-label>
+          <textarea matInput placeholder="Mensagem a ser enviada ..." formControlName="message" rows="8" (resize)="false"></textarea>
+        </mat-form-field>
+        <mat-error *ngIf="form.hasError('message') && !form.hasError('required')">
+            A mensagem é obrigatória
+        </mat-error>
+    
+        <mat-form-field class="half-width">
+            <mat-label>Data de envio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width margin-left">
+            <mat-label>Hora do envio</mat-label>
+            <input matInput type="text" formControlName="time" mask="00:00">
+        </mat-form-field>
+    
+        <mat-form-field class="full-width">
+            <mat-label>Telefones (DDD + telefone)</mat-label>
+            <input matInput type="tel" placeholder="Apenas números" (keyup)="validPhoneInput($event)" maxlength="11" minlength="11">
+            <mat-hint>Ex: 45996743837</mat-hint>
+        </mat-form-field>
+        <mat-error *ngIf="phoneError.error">{{phoneError.message}}</mat-error>
+
+        <mat-chip-list aria-label="Fish selection" *ngIf="phoneChips.length > 0">
+            <mat-chip color="primary" selected *ngFor="let item of phoneChips" (removed)="removePhone(item)">
+                {{item.substr(0,3)}}...
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+        <div class="actions margin-top">
+            <button mat-raised-button color="warn">Cancelar</button>
+            <button (click)="submit()" mat-raised-button color="primary">Agendar</button>
+        </div>
+    
+    </form>
+</div>
+
