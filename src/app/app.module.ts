@@ -7,6 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SchedulesModule } from './pages/schedules/schedules.module';
 import { CardComponent } from './components/card/card.component';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const options: Partial<IConfig> | null | (() => Partial<IConfig>) = null;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +21,8 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     BrowserAnimationsModule,
     SchedulesModule,
-    MatCardModule
+    MatCardModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

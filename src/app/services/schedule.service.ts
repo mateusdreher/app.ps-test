@@ -12,12 +12,19 @@ export class ScheduleService {
   schedules: ScheduleInterface[] = [];
   constructor() { }
 
+  list(): Observable<ScheduleInterface[]> {
+    this.getShcedulesAlreayInStorage();
+
+    return of(this.schedules);
+  }
+
   create(schedule: ScheduleInterface): Observable<ResponseInterface> {
     try {
       this.getShcedulesAlreayInStorage();
 
-      schedule.id = this.schedules[this.schedules.length - 1].id + 1;
+      schedule.id = this.schedules.length > 0 ? this.schedules[this.schedules.length - 1].id + 1 : 0;
       this.schedules.push(schedule);
+      console.log(this.schedules)
       this.saveLocalStorage();
 
       const ret: ResponseInterface = {
@@ -67,7 +74,7 @@ export class ScheduleService {
       const ret: ResponseInterface = {
         status: 'success',
         data: this.schedules,
-        message: 'Sucesso ao atualizar o agendamento';
+        message: 'Sucesso ao atualizar o agendamento'
       };
 
       return of(ret);
@@ -112,7 +119,7 @@ export class ScheduleService {
 
   getShcedulesAlreayInStorage() {
     this.returnLocalStorage = localStorage.getItem('schedules');
-    if (this.returnLocalStorage) {
+    if (this.returnLocalStorage && this.returnLocalStorage !== '') {
       this.schedules = JSON.parse(this.returnLocalStorage);
     }
   }
