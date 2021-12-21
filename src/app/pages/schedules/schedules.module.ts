@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button'
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { SharedModule } from 'src/app/shared/shared.module';
 
 export const options: Partial<IConfig> | null | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -30,7 +31,8 @@ export const options: Partial<IConfig> | null | (() => Partial<IConfig>) = null;
     MatIconModule,
     MatNativeDateModule,
     MatButtonModule,
-    NgxMaskModule.forChild()
+    NgxMaskModule.forChild(),
+    SharedModule
   ]
 })
 export class SchedulesModule { }
