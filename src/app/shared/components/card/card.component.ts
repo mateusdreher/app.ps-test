@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SubItemCard } from 'src/app/interfaces/subitem-card.interface';
+import { SubItemCard } from 'src/app/shared/interfaces/subitem-card.interface';
 
 @Component({
   selector: 'app-card',

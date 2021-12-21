@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResponseInterface } from '../interfaces/response.interface';
-import { ScheduleInterface } from '../interfaces/schedule.interface';
+import { ResponseInterface } from '../shared/interfaces/response.interface';
+import { ScheduleInterface } from '../shared/interfaces/schedule.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { groupBy } from 'rxjs/internal/operators/groupBy';
-import { ScheduleInterface } from 'src/app/interfaces/schedule.interface';
+import { ScheduleInterface } from 'src/app/shared/interfaces/schedule.interface';
 import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
