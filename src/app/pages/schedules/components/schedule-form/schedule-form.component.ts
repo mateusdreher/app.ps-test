@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { ScheduleInterface } from 'src/app/shared/interfaces/schedule.interface';
 
@@ -34,8 +35,10 @@ export class ScheduleFormComponent implements OnInit {
     message: ''
   };
 
-  constructor(private scheduleService: ScheduleService) {
-  }
+  constructor(
+    private scheduleService: ScheduleService,
+    private alertService: AlertService
+    ) {}
 
   ngOnInit(): void {
     if(this.isEdit) {
@@ -50,7 +53,6 @@ export class ScheduleFormComponent implements OnInit {
         this.newSchedule.send_at_date = success.send_at_date;
         this.newSchedule.send_at_time = success.send_at_time;
 
-        console.log(['LOG', success, this.form.value])
         this.phoneChips = success.phones;
       },
       (error) => {
@@ -95,13 +97,13 @@ export class ScheduleFormComponent implements OnInit {
   submit() {
     Object.keys(this.newSchedule).forEach((key) => {
       if ((this.newSchedule as any)[key] === '' || (this.newSchedule as any)[key] === null) {
-        alert('ERRO em ' + key)
+        this.alertService.error('Campo inválido', `O campo ${key} é inválido. Por favor verifique`, 'OK');
         return;
       }
     });
 
     if (this.phoneChips.length === 0) {
-      alert('ERRO Phones');
+      this.alertService.error('Campo inválido', 'Deve haver pelo menos um telefone para o envio do sms', 'OK');
       return;
     }
 
@@ -119,11 +121,11 @@ export class ScheduleFormComponent implements OnInit {
   create() {
     this.scheduleService.create(this.newSchedule).subscribe(
       (success) => {
-        alert(success.message);
-        this.closeForm.emit('');
+        this.alertService.success('Sucesso', 'SMS agendado com sucesso', 'FECHAR');
+        this.closeForm.emit('update');
       },
       (error) => {
-        alert(error.message);
+        this.alertService.error('Erro', 'Não foi possível agendar o SMS', 'FECHAR');
       }
     );
   }
@@ -131,11 +133,11 @@ export class ScheduleFormComponent implements OnInit {
   edit() {
     this.scheduleService.update(this.newSchedule).subscribe(
       (success) => {
-        alert(success.message);
-        this.closeForm.emit('');
+        this.alertService.success('Sucesso', 'Agendamento atualizazdo com sucesso', 'FECHAR');
+        this.closeForm.emit('update');
       },
       (error) => {
-        alert(error.message);
+        this.alertService.error('Erro', 'Não foi possível editar o agendamento', 'FECHAR');
       }
     )
   }

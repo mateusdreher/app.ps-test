@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SchedulesModule } from './pages/schedules/schedules.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { SharedModule } from './shared/shared.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 export const options: Partial<IConfig> | null | (() => Partial<IConfig>) = null;
 
@@ -20,7 +21,8 @@ export const options: Partial<IConfig> | null | (() => Partial<IConfig>) = null;
     BrowserAnimationsModule,
     SchedulesModule,
     NgxMaskModule.forRoot(),
-    SharedModule
+    SharedModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

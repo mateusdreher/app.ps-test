@@ -1,6 +1,7 @@
 <div class="main">
     <div class="background"></div>
     <form class="form-schedule">
+        <h2>{{isEdit ? 'Editar Agendamento' : 'Novo Agendamento de SMS'}}</h2>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Mensagem</mat-label>
           <textarea matInput placeholder="Mensagem a ser enviada ..." [(ngModel)]="newSchedule.message" name="messsage" rows="8" (resize)="false"></textarea>
@@ -37,7 +38,7 @@
             </mat-chip>
         </mat-chip-list>
         <div class="actions margin-top">
-            <button type="button" (click)="closeForm.emit('')" mat-raised-button color="warn">Cancelar</button>
+            <button type="button" (click)="closeForm.emit('close')" mat-raised-button color="warn">Cancelar</button>
             <button type="button" (click)="submit()" mat-raised-button color="primary">{{isEdit ? 'Editar' : 'Agendar'}}</button>
         </div>
     

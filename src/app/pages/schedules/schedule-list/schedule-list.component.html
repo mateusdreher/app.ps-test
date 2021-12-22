@@ -1,4 +1,8 @@
+<header class="mat-elevation-z6">
+    <h1><b>Acompanhe seus agendamentos</b></h1>
+</header>
 <div class="list">
+    <h3 *ngIf="schedules.length === 0">Você não possui nenhum agendamento ativo...</h3>
     <app-card *ngFor="let item of schedules"
     title="{{item.send_at_date | date:'dd/MM/yyyy'}}"
     subtitle="{{item.send_at_time.substr(0,2)}}:{{item.send_at_time.substr(2,4)}}"
@@ -13,22 +17,25 @@
     </mat-chip-list>
         <div actions>
             <span>
-                <mat-icon aria-hidden="false" (click)="showFormEdit(item.id)">edit</mat-icon>
+                <mat-icon aria-hidden="false" (click)="showFormEdit(item.id)" class="color-secondary">edit</mat-icon>
             </span>
             <span>
-                <mat-icon aria-hidden="false" (click)="removeSchedule(item.id)">delete</mat-icon>
+                <mat-icon aria-hidden="false" (click)="removeSchedule(item.id)" class="color-red">delete</mat-icon>
             </span>
         </div>
     </app-card>
 </div>
 
-<button (click)="showFormCreate()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
-    <mat-icon>add</mat-icon>
-</button>
+<div class="add">
+    <button (click)="showFormCreate()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
 
 <app-schedule-form 
     *ngIf="showScheduleForm"
     [isEdit]="editSchedule"
     [idToEdit]="idToEdit"
-    (closeForm)="showScheduleForm = false"
+    (closeForm)="eventForm($event)"
 ></app-schedule-form>
