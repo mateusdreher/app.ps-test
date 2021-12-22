@@ -37,6 +37,12 @@
                 </button>
             </mat-chip>
         </mat-chip-list>
+        <div class="csv">
+            <p>Importe uma lista de contatos CSV</p>
+            <button type="button" (click)="clickUpload()" mat-stroked-button color="primary">UPLOAD</button>
+            <input id="upload" type="file" class="upload" (change)="changeFileField($event.target)">
+        </div>
+
         <div class="actions margin-top">
             <button type="button" (click)="closeForm.emit('close')" mat-raised-button color="warn">Cancelar</button>
             <button type="button" (click)="submit()" mat-raised-button color="primary">{{isEdit ? 'Editar' : 'Agendar'}}</button>

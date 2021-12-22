@@ -142,4 +142,23 @@ export class ScheduleFormComponent implements OnInit {
     )
   }
 
+  clickUpload() {
+    const element = document.getElementById('upload');
+    element?.click();
+  }
+  changeFileField(target: EventTarget | null) {
+    const files = target ? (target as HTMLInputElement).files : null;
+
+    if (files && files.length > 0 && files.item(0)) {
+      let file = files.item(0);
+
+      let reader: FileReader = new FileReader();
+      reader.readAsText(file as File);
+      reader.onload = (e) => {
+        let csv: string = reader.result as string;
+        this.phoneChips = csv.split(';');
+      }
+    }
+  }
+
 }
