@@ -35,3 +35,25 @@ header {
     bottom: 10%;
     right: 10%;
 }
+
+@media (min-width: 760px) and (max-width: 1080px) {
+    .list {
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        app-card {
+            width: 30%;
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .list {
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        app-card {
+            width: 100%;
+        }
+    }
+}

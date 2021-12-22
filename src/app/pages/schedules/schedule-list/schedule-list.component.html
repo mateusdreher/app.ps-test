@@ -2,7 +2,7 @@
     <h1><b>Acompanhe seus agendamentos</b></h1>
 </header>
 <div class="list">
-    <h3 *ngIf="schedules.length === 0">Você não possui nenhum agendamento ativo...</h3>
+    <h3 *ngIf="schedules.length === 0">Você não possui nenhum agendamento ativo... Clique no botão abaixo para agendar</h3>
     <app-card *ngFor="let item of schedules"
     title="{{item.send_at_date | date:'dd/MM/yyyy'}}"
     subtitle="{{item.send_at_time.substr(0,2)}}:{{item.send_at_time.substr(2,4)}}"
