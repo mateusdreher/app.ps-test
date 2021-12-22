@@ -46,7 +46,14 @@ export class ScheduleListComponent implements OnInit {
     this.showScheduleForm = true;
   }
 
-  // closeForm() {
-  //   this.closeForm.emit('true');
-  // }
+  removeSchedule(id: number) {
+    this.scheduleService.delete(id).subscribe(
+      (success) => {
+        alert(success.message);
+      },
+      (error) => {
+        alert(error.message)
+      }
+    )
+  }
 }
