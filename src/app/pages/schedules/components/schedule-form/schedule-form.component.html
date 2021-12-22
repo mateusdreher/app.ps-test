@@ -1,9 +1,9 @@
 <div class="main">
     <div class="background"></div>
-    <form class="form-schedule" [formGroup]="form">
+    <form class="form-schedule">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Mensagem</mat-label>
-          <textarea matInput placeholder="Mensagem a ser enviada ..." formControlName="message" rows="8" (resize)="false"></textarea>
+          <textarea matInput placeholder="Mensagem a ser enviada ..." [(ngModel)]="newSchedule.message" name="messsage" rows="8" (resize)="false"></textarea>
         </mat-form-field>
         <mat-error *ngIf="form.hasError('message') && !form.hasError('required')">
             A mensagem é obrigatória
@@ -11,14 +11,14 @@
     
         <mat-form-field class="half-width">
             <mat-label>Data de envio</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date" >
+            <input matInput [matDatepicker]="picker" [(ngModel)]="newSchedule.send_at_date" name="date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     
         <mat-form-field class="half-width margin-left">
             <mat-label>Hora do envio</mat-label>
-            <input matInput type="text" formControlName="time" mask="00:00">
+            <input matInput type="text" [(ngModel)]="newSchedule.send_at_time" name="time" mask="00:00" >
         </mat-form-field>
     
         <mat-form-field class="full-width">
@@ -37,8 +37,8 @@
             </mat-chip>
         </mat-chip-list>
         <div class="actions margin-top">
-            <button mat-raised-button color="warn">Cancelar</button>
-            <button (click)="submit()" mat-raised-button color="primary">Agendar</button>
+            <button type="button" (click)="closeForm.emit('')" mat-raised-button color="warn">Cancelar</button>
+            <button type="button" (click)="submit()" mat-raised-button color="primary">{{isEdit ? 'Editar' : 'Agendar'}}</button>
         </div>
     
     </form>

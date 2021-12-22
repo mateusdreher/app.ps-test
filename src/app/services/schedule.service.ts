@@ -18,6 +18,14 @@ export class ScheduleService {
     return of(this.schedules);
   }
 
+  getById(id: number):Observable<ScheduleInterface> {
+    this.getShcedulesAlreayInStorage();
+
+    const ret = this.schedules.filter((item) => item.id === id);
+
+    return of(ret[0]);
+  }
+
   create(schedule: ScheduleInterface): Observable<ResponseInterface> {
     try {
       this.getShcedulesAlreayInStorage();

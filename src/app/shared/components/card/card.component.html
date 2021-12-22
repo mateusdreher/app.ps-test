@@ -1,8 +1,14 @@
-<mat-card>
+<mat-card class="z-depth-3">
     <mat-card-title>{{title}}</mat-card-title>
-    <mat-card-subtitle>Start</mat-card-subtitle>
-    <mat-card-content>{{description}}</mat-card-content>
-    <mat-card-actions *ngIf="action.active">
-      <button mat-button>{{action.text}}</button>
+    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+    <mat-card-content>
+      <div><i>{{hidden ? description.substr(0, 15) + '...' : description}}</i></div>
+      <ng-content select="[body]" *ngIf="!hidden"></ng-content>
+    </mat-card-content>
+    <mat-card-actions>
+      <ng-content select="[actions]"></ng-content>
+      <span>
+        <mat-icon aria-hidden="false" (click)="hidden = !hidden">{{hidden ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </span>
     </mat-card-actions>
   </mat-card>

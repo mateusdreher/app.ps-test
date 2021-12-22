@@ -1,0 +1,12 @@
+.list {
+    width: 80%;
+    padding: 2%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    app-card{
+        width: 30%;
+        margin-left: 3%;
+        max-height: 250px !important;
+    }
+}

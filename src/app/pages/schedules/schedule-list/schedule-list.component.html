@@ -1,4 +1,34 @@
-<app-card
-    title="Titulo teste"
-    description="Descrição teste"
-></app-card>
+<div class="list">
+    <app-card *ngFor="let item of schedules"
+    title="{{item.send_at_date | date:'dd/MM/yyyy'}}"
+    subtitle="{{item.send_at_time.substr(0,2)}}:{{item.send_at_time.substr(2,4)}}"
+    description="{{item.message}}"
+>
+    <mat-chip-list body>
+        <mat-chip color="primary" selected *ngFor="let phone of item.phones">
+            {{phone | mask: '(00) 00000-0000'}}
+            <button matChipRemove>
+            </button>
+        </mat-chip>
+    </mat-chip-list>
+        <div actions>
+            <span>
+                <mat-icon aria-hidden="false" (click)="showFormEdit(item.id)">edit</mat-icon>
+            </span>
+            <span>
+                <mat-icon aria-hidden="false">delete</mat-icon>
+            </span>
+        </div>
+    </app-card>
+</div>
+
+<button (click)="showFormCreate()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+</button>
+
+<app-schedule-form 
+    *ngIf="showScheduleForm"
+    [isEdit]="editSchedule"
+    [idToEdit]="idToEdit"
+    (closeForm)="showScheduleForm = false"
+></app-schedule-form>
